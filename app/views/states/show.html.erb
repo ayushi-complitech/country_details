@@ -1,0 +1,15 @@
+<strong class="fs-5">Name:</strong>
+<%= @state.name %></br>
+
+<strong class="fs-5">Abbreviation:</strong>
+<%= @state.abbreviation %></br>
+
+<strong class="fs-5">Country:</strong>
+<%= @state.country.name %></br>
+
+<strong class="fs-5">Active:</strong>
+<%= @state.is_active %></br>
+
+
+<%= link_to 'Edit', edit_state_path(@state), class:"btn btn-warning" %>
+<%= link_to 'Back', states_path, class:"btn btn-success ms-4" %>

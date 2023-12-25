@@ -1,0 +1,45 @@
+<%= form_with model: @state do |form| %>
+  <div class="mb-3 row">
+    <%= form.label :name, class:"col-sm-2 col-form-label" %>
+    <div class = "col-lg-9">
+    <%= form.text_field :name, class:"form-control" %>
+  </div>
+    <% @state.errors.full_messages_for(:name).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div class="mb-3 row">
+    <%= form.label :abbreviation, class:"col-sm-2 col-form-label" %>
+    <div class = "col-lg-9">
+    <%= form.text_field :abbreviation, class:"form-control" %><br>
+  </div>
+    <% @state.errors.full_messages_for(:abbreviation).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+  
+  <div class="mb-3 row">
+  <%= form.label :country, class:"col-sm-2 col-form-label" %>
+  <div class = "col-lg-9">
+   <%= form.collection_select :country_id, Country.order(:name), :id, :name, { prompt: 'Select a Country' }, { id: 'country-select', class: "form-select" } %>
+  </div>
+  <% @state.errors.full_messages_for(:abbreviation).each do |message| %>
+    <div><%= message %></div>
+  <% end %>
+  </div>
+
+   <div class="mb-3 row">
+    <%= form.label :active, class:"col-sm-2 col-form-label" %>
+    <div class = "col-lg-9">
+    <%= form.check_box :is_active, class:"mb-2 form-check-input" %><br>
+  </div>
+    <% @state.errors.full_messages_for(:is_active).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit"Create State", class:"btn btn-primary mt-2 mb-2" %>
+  </div>
+<% end %>

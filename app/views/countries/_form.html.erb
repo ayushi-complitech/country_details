@@ -1,0 +1,25 @@
+<%= form_with model: @country do |form| %>
+  <div class="mb-3 row">
+    <%= form.label :name, class:"col-sm-2 col-form-label" %>
+    <div class = "col-lg-9">
+    <%= form.text_field :name, class:"form-control", placeholder: "Enter your name.." %>
+    </div>
+    <% @country.errors.full_messages_for(:name).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div class="mb-3 row">
+    <%= form.label :active, class:"col-sm-2 col-form-label"  %>
+    <div class = "col-lg-9">
+    <%= form.check_box :is_active, class:"mb-2 form-check-input" %><br>
+  </div>
+    <% @country.errors.full_messages_for(:is_active).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.submit"Create Country", class:"btn btn-primary mt-2 mb-2" %>
+  </div>
+<% end %>

@@ -1,0 +1,8 @@
+<strong class="fs-5">Name:</strong>
+<%= @country.name %></br>
+
+<strong class="fs-5">Active:</strong>
+<%= @country.is_active %></br>
+
+<%= link_to 'Edit', edit_country_path(@country), class:"btn btn-warning" %>
+<%= link_to 'Back', countries_path, class:"btn btn-success ms-4" %>

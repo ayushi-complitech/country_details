@@ -1,0 +1,14 @@
+<strong class="fs-5">Name:</strong>
+<%= @city.name %></br>
+
+<strong class="fs-5">Country:</strong>
+<%= @city.country.name %></br>
+
+<strong class="fs-5">State:</strong>
+<%= @city.state.name %></br>
+
+<strong class="fs-5">Active:</strong>
+<%= @city.is_active %></br>
+
+<%= link_to 'Edit', edit_city_path(@city), class:"btn btn-warning" %>
+<%= link_to 'Back', cities_path, class:"btn btn-success ms-4" %>
