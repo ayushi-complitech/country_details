@@ -68,3 +68,5 @@ group :test do
 end
 
 gem 'ajax-datatables-rails'
+
+gem 'paranoia', '~> 2.6'

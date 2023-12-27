@@ -1,4 +1,5 @@
 class City < ApplicationRecord
+  acts_as_paranoid
   belongs_to :country
   belongs_to :state
   validates :name, presence: true

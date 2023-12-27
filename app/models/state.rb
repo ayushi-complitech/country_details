@@ -1,4 +1,5 @@
 class State < ApplicationRecord
+  acts_as_paranoid
   belongs_to :country
   has_many :cities, dependent: :destroy
   validates :name, :abbreviation, presence: true
