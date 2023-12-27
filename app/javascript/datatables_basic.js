@@ -30,7 +30,7 @@ const DatatableBasic = function() {
             columnDefs: [{ 
                 orderable: false,
                 width: 100,
-                targets: [ 3 ]
+                targets: [ 2 ]
             }],
             dom: '<"datatable-header"fl><"datatable-scroll"t><"datatable-footer"ip>',
             language: {

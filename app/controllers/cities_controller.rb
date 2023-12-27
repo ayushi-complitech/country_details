@@ -1,6 +1,9 @@
 class CitiesController < ApplicationController
   def index
-    @cities = City.all
+    respond_to do |format|
+      format.html
+      format.json { render json: CityDatatable.new(params, view_context: view_context) }
+    end
   end
  
   def show

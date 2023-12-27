@@ -1,7 +1,10 @@
 class CountriesController < ApplicationController
   
   def index
-    @countries = Country.all
+    respond_to do |format|
+      format.html
+      format.json { render json: CountryDatatable.new(params, view_context: view_context) }
+    end
   end
  
   def show

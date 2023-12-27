@@ -6,7 +6,7 @@
      <%= link_to 'New state', new_state_path, class: "btn btn-warning", style: 'color:black' %>
     </div>
   </div>
-<table class="table datatable-basic">
+<table class="table" id="states-datatable" data-source="<%= states_path(format: :json) %>">
  <thead>
   <tr>
     <th>Name</th>
@@ -18,34 +18,7 @@
  </thead>
 
  <tbody>
-  <% @states.each do |state| %>
-    <tr>
-      <td><%= state.name %></td>
-      <td><%= state.abbreviation %></td>
-      <td><%= state.country.name %></td>
-      <td><%= state.is_active %></td>
-     <td class="text-center">
-        <div class="d-inline-flex">
-          <div class="dropdown">
-            <a href="#" class="text-body" data-bs-toggle="dropdown">
-              <i class="ph-list"></i>
-            </a>
-
-     <div class="dropdown-menu dropdown-menu-end">
-          <%= link_to 'Show', state_path(state), class:"dropdown-item" %>           
-
-          <%= link_to 'Edit', edit_state_path(state), class:"dropdown-item" %>                
-      
-          <%= link_to 'Destroy', state_path(state), class:"dropdown-item",
-          data: { confirm: "Are you sure?", method: :delete, turbo_confirm: "Are you sure?", turbo_method: :delete }
-           %>                 
-        
-      </div>  
-    </div>
-  </div>
-    </td>
-   </tr>
-  <% end %>
+  
  </tbody>
 </table>
 </div>

@@ -6,7 +6,7 @@
      <%= link_to 'New country', new_country_path, class: "btn btn-warning", style: 'color:black' %>
     </div>
   </div>
-<table class="table datatable-basic">
+<table class="table" id="countries-datatable" data-source="<%= countries_path(format: :json) %>">
  <thead>
   <tr>
     <th>Name</th>
@@ -16,32 +16,7 @@
  </thead>
 
  <tbody>
-  <% @countries.each do |country| %>
-    <tr>
-      <td><%= country.name %></td>
-      <td><%= country.is_active %></td>
-     <td class="text-center">
-        <div class="d-inline-flex">
-          <div class="dropdown">
-            <a href="#" class="text-body" data-bs-toggle="dropdown">
-              <i class="ph-list"></i>
-            </a>
-
-     <div class="dropdown-menu dropdown-menu-end">
-          <%= link_to 'Show', country_path(country), class:"dropdown-item" %>           
-
-          <%= link_to 'Edit', edit_country_path(country), class:"dropdown-item" %>                
-      
-          <%= link_to 'Destroy', country_path(country), class:"dropdown-item",
-          data: { confirm: "Are you sure?", method: :delete, turbo_confirm: "Are you sure?", turbo_method: :delete }
-           %>                 
-        
-      </div>  
-    </div>
-  </div>
-    </td>
-   </tr>
-  <% end %>
+  
  </tbody>
 </table>
 </div>

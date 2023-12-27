@@ -7,4 +7,7 @@ import "jquery.min"
 import "datatables.min"
 import "app"
 import "datatables_basic"
+import "countries"
+import "states"
+import "cities"
 Turbo.session.drive = true
