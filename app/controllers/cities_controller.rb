@@ -49,5 +49,11 @@ class CitiesController < ApplicationController
     def city_params
       params.require(:city).permit(:name, :is_active, :country_id, :state_id)
     end
+
+    def states_by_country 
+      @states = State.where(country_id: params[:country_id]) 
+      render partial: 'states_dropdown', locals: { states: @states } 
+    end
+
   
 end

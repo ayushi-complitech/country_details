@@ -3,7 +3,7 @@
    <div class="mb-3 row">
   <%= form.label :country, class:"col-sm-2 col-form-label" %>
   <div class = "col-lg-9">
-   <%= form.collection_select :country_id, Country.order(:name), :id, :name, { prompt: 'Select a Country' }, { id: 'country-select', class: "form-select" } %>
+   <%= form.collection_select :country_id, Country.order(:name), :id, :name, { prompt: 'Select a Country' }, {id: 'country-select', class: "form-select" } %>
   </div>
   <% @city.errors.full_messages_for(:name).each do |message| %>
       <div><%= message %></div>
@@ -40,30 +40,31 @@
     <% end %>
   </div>
 
-  <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        var countrySelect = document.getElementById('country-select');
-        var stateField = document.getElementById('state-field');
-        var stateSelect = document.getElementById('state-select');
-        var states = <%= raw State.all.group_by(&:country_id).to_json %>;
-        countrySelect.addEventListener('change', function() {
-        var selectedCountryId = this.value;
-        if (selectedCountryId !== '') {
-          stateSelect.innerHTML = '';
-          states[selectedCountryId].forEach(function(state) {
-            var option = document.createElement('option');
-            option.value = state.id;
-            option.text = state.name;
-            stateSelect.appendChild(option);
-        });
-          stateField.style.display = 'block';
-        } else {
-             stateField.style.display = 'none';
-               }
-         });
-      });
-</script>
+<script>
 
+   document.addEventListener('DOMContentLoaded', function() {
+                    var countrySelect = document.getElementById('country-select');
+                    var stateField = document.getElementById('state-field');
+                    var stateSelect = document.getElementById('state-select');
+                    var states = <%= raw State.all.group_by(&:country_id).to_json %>;
+                    countrySelect.addEventListener('change', function() {
+                        var selectedCountryId = this.value;
+                        if (selectedCountryId !== '') {
+                            stateSelect.innerHTML = '';
+                            states[selectedCountryId].forEach(function(state) {
+                                var option = document.createElement('option');
+                                option.value = state.id;
+                                option.text = state.name;
+                                stateSelect.appendChild(option);
+                            });
+                            stateField.style.display = 'block';
+                        } else {
+                            stateField.style.display = 'none';
+                        }
+                    });
+                });
+   
+ </script>
   <div>
     <%= form.submit"Create City", class:"btn btn-primary mt-2 mb-2" %>
   </div>
