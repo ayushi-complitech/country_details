@@ -39,31 +39,35 @@
       <div><%= message %></div>
     <% end %>
   </div>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-
-   document.addEventListener('DOMContentLoaded', function() {
-                    var countrySelect = document.getElementById('country-select');
-                    var stateField = document.getElementById('state-field');
-                    var stateSelect = document.getElementById('state-select');
-                    var states = <%= raw State.all.group_by(&:country_id).to_json %>;
-                    countrySelect.addEventListener('change', function() {
-                        var selectedCountryId = this.value;
-                        if (selectedCountryId !== '') {
-                            stateSelect.innerHTML = '';
-                            states[selectedCountryId].forEach(function(state) {
-                                var option = document.createElement('option');
-                                option.value = state.id;
-                                option.text = state.name;
-                                stateSelect.appendChild(option);
-                            });
-                            stateField.style.display = 'block';
-                        } else {
-                            stateField.style.display = 'none';
-                        }
-                    });
-                });
-   
+     $(document).ready(function() {
+     $('#country-select').change(function() {
+       var selectedCountryId = $(this).val();
+       var stateField = $('#state-field');
+       var stateSelect = $('#state-select');
+       if (selectedCountryId !== '') {
+          $.ajax({
+            url: '/states/' + selectedCountryId + '/fetch_states',
+            type: 'GET',
+            dataType: 'json',
+            success: function(data) {
+              stateSelect.empty();
+              $.each(data.states, function(index, state) {
+                stateSelect.append('<option value="' + state.id + '">' + state.name + '</option>');
+              });
+                  stateField.show();
+            },
+                error: function(error) {
+                console.error('Error:', error);
+                }
+              });
+            } else {
+                stateSelect.empty();
+                stateField.hide();
+              }
+            });
+          });
  </script>
   <div>
     <%= form.submit"Create City", class:"btn btn-primary mt-2 mb-2" %>

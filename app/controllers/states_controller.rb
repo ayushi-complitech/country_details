@@ -44,6 +44,13 @@ class StatesController < ApplicationController
  
     redirect_to states_path
   end
+
+  def fetch_states
+    country = Country.find(params[:country_id])
+    states = country.states
+
+    render json: { states: states }
+  end
  
   private
     def state_params
