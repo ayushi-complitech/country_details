@@ -1,8 +1,10 @@
 class CitiesController < ApplicationController
   def index
+    @cities = City.all
     respond_to do |format|
       format.html
       format.json { render json: CityDatatable.new(params, view_context: view_context) }
+      format.csv { send_data City.to_csv, filename: "cities-#{DateTime.now.strftime("%d%m%Y%H%M")}.csv"}
     end
   end
  
@@ -49,11 +51,5 @@ class CitiesController < ApplicationController
     def city_params
       params.require(:city).permit(:name, :is_active, :country_id, :state_id)
     end
-
-    def states_by_country 
-      @states = State.where(country_id: params[:country_id]) 
-      render partial: 'states_dropdown', locals: { states: @states } 
-    end
-
   
 end

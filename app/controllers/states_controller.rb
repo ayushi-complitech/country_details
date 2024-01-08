@@ -1,8 +1,10 @@
 class StatesController < ApplicationController
   def index
+    @states = State.all
     respond_to do |format|
       format.html
       format.json { render json: StateDatatable.new(params, view_context: view_context) }
+      format.csv { send_data State.to_csv, filename: "states-#{DateTime.now.strftime("%d%m%Y%H%M")}.csv"}
     end
   end
  

@@ -1,9 +1,11 @@
 class CountriesController < ApplicationController
   
   def index
+    @countries = Country.all
     respond_to do |format|
       format.html
       format.json { render json: CountryDatatable.new(params, view_context: view_context) }
+      format.csv { send_data Country.to_csv, filename: "countries-#{DateTime.now.strftime("%d%m%Y%H%M")}.csv"}
     end
   end
  
@@ -44,6 +46,14 @@ class CountriesController < ApplicationController
     @country.destroy
  
     redirect_to countries_path
+  end
+
+  def status
+    raise params.inspect
+    country = Country.active
+    country = Country.inactive
+
+    render json: { countries: country }
   end
 
   private

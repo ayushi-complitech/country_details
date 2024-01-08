@@ -41,6 +41,7 @@ class CityDatatable < AjaxDatatablesRails::ActiveRecord
 
   def action(record)
    html = <<-HTML
+   <div class="text-center">
    <div class="d-inline-flex">
    <div class="dropdown">
     <a href="#" class="text-body" data-bs-toggle="dropdown">
@@ -53,6 +54,7 @@ class CityDatatable < AjaxDatatablesRails::ActiveRecord
     </div>
    </div>
    </div>
+ </div>
     HTML
     html.html_safe
   end

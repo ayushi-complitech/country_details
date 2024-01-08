@@ -15,4 +15,5 @@ Rails.application.routes.draw do
   resources :states 
   resources :cities
   get '/states/:country_id/fetch_states', to: 'states#fetch_states'
+  get '/countries/:country_id/status', to: 'countries#status'
 end

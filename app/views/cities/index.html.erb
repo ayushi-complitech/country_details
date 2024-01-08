@@ -3,7 +3,18 @@
   <div class="card-header d-md-flex">
      <h5 class="mb-0">City</h5>
      <div class="collapse d-lg-block my-lg-auto ms-lg-auto">
-      <%= link_to 'New City', new_city_path, class: "btn btn-warning", style: 'color:black' %>
+      <div class="dropdown d-none d-md-inline-block ms-2 text-white me-3">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+         Active
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <li><a class="dropdown-item" href="#">True</a></li>
+        <li><a class="dropdown-item" href="#">False</a></li>
+        <li><a class="dropdown-item" href="#">All</a></li>
+        </ul>
+    </div>
+      <%= link_to 'New City', new_city_path, class: "btn btn-warning me-3", style: 'color:black' %>
+      <%= link_to "Export to csv", cities_path(format: 'csv'), class: "btn btn-success", style: 'color:white' %>
      </div>
   </div>
 <table class="table" id="cities-datatable" data-source="<%= cities_path(format: :json) %>">
@@ -13,7 +24,7 @@
     <th>Country</th>
     <th>State</th>
     <th>Active</th>
-    <th class="text-center">Actions</th>
+    <th class="text-center" data-orderable="false">Actions</th>
   </tr>
  </thead>
 
