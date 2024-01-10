@@ -1,5 +1,5 @@
 class CountriesController < ApplicationController
-  
+
   def index
     @countries = Country.all
     respond_to do |format|
@@ -8,7 +8,16 @@ class CountriesController < ApplicationController
       format.csv { send_data Country.to_csv, filename: "countries-#{DateTime.now.strftime("%d%m%Y%H%M")}.csv"}
     end
   end
- 
+
+  def import
+    return redirect_to request.referer, notice: 'No file added' if params[:file].nil?
+    return redirect_to request.referer, notice: 'Only CSV files allowed' unless params[:file].content_type == 'text/csv'
+
+    Country.import_from_csv(params[:file])
+
+    redirect_to request.referer, notice: 'Import started...'
+  end
+
   def show
     @country = Country.find(params[:id])
   end

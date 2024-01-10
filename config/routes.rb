@@ -11,9 +11,21 @@ Rails.application.routes.draw do
 
   resources :countries do
     get :state, on: :member
+    collection do
+      post 'import'
+    end
   end
-  resources :states 
-  resources :cities
+
+  resources :states do
+    collection do
+      post 'import'
+    end
+  end
+  resources :cities do
+  collection do
+      post 'import'
+    end
+  end
   get '/states/:country_id/fetch_states', to: 'states#fetch_states'
   get '/countries/:country_id/status', to: 'countries#status'
 end

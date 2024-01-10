@@ -1,4 +1,11 @@
 class Country < ApplicationRecord
+  acts_as_paranoid
+  has_many :states, dependent: :destroy
+  has_many :cities, dependent: :destroy
+  validates :name, presence: true
+  scope :active, -> { where(is_active: true) }
+  scope :inactive, -> { where(is_active: false) } 
+  
   require 'csv'
   def self.to_csv
     countries = all
@@ -9,10 +16,14 @@ class Country < ApplicationRecord
     end
    end
   end
-  acts_as_paranoid
-  has_many :states, dependent: :destroy
-  has_many :cities, dependent: :destroy
-  validates :name, presence: true
-  scope :active, -> { where(is_active: true) }
-  scope :inactive, -> { where(is_active: false) }  
+
+  def self.import_from_csv(file)
+    CSV.foreach(file.path, headers: true) do |row|
+      country_hash = {}
+      country_hash[:name] = row['name']
+      country_hash[:is_active] = row['is_active']
+
+      Country.find_or_create_by!(country_hash)
+    end
+  end
 end
